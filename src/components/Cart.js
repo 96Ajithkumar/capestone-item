@@ -2,8 +2,9 @@ import React, { useContext } from "react";
 import { Store } from "../Store";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
-import { List } from "@mui/material";
+import { List, ListItem } from "@mui/material";
 import { Link } from "react-router-dom";
+import { baseUrl } from "./Const/Constants";
 
 export default function Cart() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -23,27 +24,29 @@ export default function Cart() {
           ) : (
             <List>
               {cartItems.map((item) => {
-                <List.Item key={item.id}>
-                  <div className="row align-items-center">
-                    <div className="col-md-4">
-                      <img src={item.image} alt={item.title} />
-                      <Link to={`/products/${item.id}`}>{item.category}</Link>
+                return (
+                  <ListItem key={item.id}>
+                    <div className="row align-items-center">
+                      <div className="col-md-4">
+                        <img src={item.image} alt={item.title} />
+                        <Link to={`/${baseUrl}/products/${item.id}`}>{item.category}</Link>
+                      </div>
+                      <div className="col-md-3">
+                        <button disabled={item.quantity === 1}>
+                          <i className="fa fa-minus-circle"></i>
+                        </button>
+                        <span>{item.quantity}</span>
+                        <button disabled={item.quantity === item.countInStock}>
+                          <i className="fa fa-plus-circle"></i>
+                        </button>
+                      </div>
+                      <div className="col-md-3">${item.price}</div>
+                      <div className="col-md-2">
+                        <i className="fa fa-trash"></i>
+                      </div>
                     </div>
-                    <div className="col-md-3">
-                      <button disabled={item.quantity === 1}>
-                        <i className="fa fa-minus-circle"></i>
-                      </button>
-                      <span>{item.quantity}</span>
-                      <button disabled={item.quantity === item.countInStock}>
-                        <i className="fa fa-plus-circle"></i>
-                      </button>
-                    </div>
-                    <div className="col-md-3">${item.price}</div>
-                    <div className="col-md-2">
-                      <i className="fa fa-trash"></i>
-                    </div>
-                  </div>
-                </List.Item>;
+                  </ListItem>
+                );
               })}
             </List>
           )}

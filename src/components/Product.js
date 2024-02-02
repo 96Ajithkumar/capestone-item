@@ -31,7 +31,7 @@ export default function Product() {
       type: "ADD_CART",
       payload: { ...product, quantity },
     });
-    navigate("/cart");
+    navigate(`/${baseUrl}/cart`);
   };
 
   useEffect(() => {
@@ -91,7 +91,7 @@ export default function Product() {
             Add to Cart
           </button>
 
-          <NavLink to={`${baseUrl}/cart`} className="btn btn-dark ms-2 px-3 py-2">
+          <NavLink to={`/${baseUrl}/cart`} className="btn btn-dark ms-2 px-3 py-2">
             Go to Cart
           </NavLink>
         </div>
