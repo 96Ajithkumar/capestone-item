@@ -6,6 +6,7 @@ import { addItem } from "../redux/action";
 import { Store } from "../Store";
 import { List } from "@mui/material";
 import axios from "axios";
+import { baseUrl } from "./Const/Constants";
 
 export default function Product() {
   const { id } = useParams();
@@ -90,7 +91,7 @@ export default function Product() {
             Add to Cart
           </button>
 
-          <NavLink to="/cart" className="btn btn-dark ms-2 px-3 py-2">
+          <NavLink to={`${baseUrl}/cart`} className="btn btn-dark ms-2 px-3 py-2">
             Go to Cart
           </NavLink>
         </div>
