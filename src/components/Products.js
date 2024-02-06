@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import { NavLink } from "react-router-dom";
+import { baseUrl, host } from "./Const/Constants";
 
 export default function Products() {
   const [data, setData] = useState([]);
@@ -12,7 +13,7 @@ export default function Products() {
   useEffect(() => {
     const getProducts = async () => {
       setLoading(true);
-      const response = await fetch("https://fakestoreapi.com/products");
+      const response = await fetch(`${host}/products`);
       if (componentMounted) {
         setData(await response.clone().json());
         setFilter(await response.json());
@@ -102,7 +103,7 @@ export default function Products() {
                     </h5>
                     <p className="card-text lead fw-bolder">${product.price}</p>
                     <NavLink
-                      to={`products/${product.id}`}
+                      to={`/${baseUrl}/products/${product.id}`}
                       className="btn btn-outline-dark"
                     >
                       Buy Now

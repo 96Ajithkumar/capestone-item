@@ -6,7 +6,7 @@ import { addItem } from "../redux/action";
 import { Store } from "../Store";
 import { List } from "@mui/material";
 import axios from "axios";
-import { baseUrl } from "./Const/Constants";
+import { baseUrl, host } from "./Const/Constants";
 
 export default function Product() {
   const { id } = useParams();
@@ -21,7 +21,7 @@ export default function Product() {
     const existItem = cart.cartItems.find((x) => x.id === product.id);
     const quantity = existItem ? existItem.quantity + 1 : 1;
     const { data } = await axios.get(
-      `https://fakestoreapi.com/products/${product.id}`
+      `${host}/products/${product.id}`
     );
     if (data.countInStock < quantity) {
       window.alert("Product is out of stock");
@@ -37,7 +37,7 @@ export default function Product() {
   useEffect(() => {
     const getProduct = async () => {
       setLoading(true);
-      const response = await fetch(`https://fakestoreapi.com/products/${id}`);
+      const response = await fetch(`${host}/products/${id}`);
       setProduct(await response.json());
       setLoading(false);
     };
